@@ -6,6 +6,7 @@ Encrypt using openssl for nova framework
 Copy the Encrypter.php and Key.php to addons folder
 
 Usage:
+
 *The Key helper will help you generate a new key so you can save it to a file
 
 Example:
