@@ -1,5 +1,6 @@
 # Encrypter
 Encrypt using openssl for nova framework
+
 **Installation**
 
 Copy the Encrypter.php and Key.php to addons folder
