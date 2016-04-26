@@ -15,7 +15,7 @@ Example:
     public function enc() {
         $key = Key::generate(); //generate a new key, you can save to file if you want.
         $enc = new Encrypter($key); //pass the key to the Encrypter class
-        $encrypted=  $enc->encrypt('Hey bro this is secret'); //some test to encrypt
+        $encrypted=  $enc->encrypt('Hey bro this is secret'); //some text to encrypt
         echo $encrypted;
         $decrypted = $enc->decrypt($encrypted);
         echo "<br>";
