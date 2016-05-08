@@ -7,42 +7,46 @@
  * 
  */
 
-namespace Helpers; 
+namespace Helpers;
+
 class Encrypter {
 
     //put your code here
     protected $algo;
     protected $iv;
 
-    public function __construct($key, $algo = 'AES-128-CBC') {
+    public function __construct($key) {
         $key = (string) $key;
         if ($this->startsWith($key, 'base64:')) {
             $key = base64_decode(substr($key, 7));
         }
-        if ($this->supported($key, $algo)) {
-            $this->key = $key;
-            $this->algo = $algo;
-        } else {
-            return FALSE;
-        }
+        $this->key = $key;
+        $this->algo = $this->setAlgo($key);
     }
 
     public function startsWith($key, $search) {
         return substr($key, 0, strlen($search)) === $search;
     }
 
-    /**
-     * Determine if the given key and cipher combination is valid.
-     *
-     * @param  string  $key
-     * @param  string  $algo
-     * @return bool
-     */
-    public function supported($key, $algo) {
+    public function setAlgo($key) {
 
-        $length = mb_strlen($key, '8bit');
-        return ($algo === 'AES-128-CBC' && $length === 16) || ($algo === 'AES-256-CBC' && $length === 32);
+        switch ($this->keyLenght($key)) {
+            case 16:
+                return "AES-128-CBC";
+                break;
+            case 32:
+                return "AES-256-CBC";
+                break;
+            default:
+                return FALSE;
+                break;
+        }
     }
+
+    public function keyLenght($key) {
+        return mb_strlen($key, '8bit');
+    }
+
 
     /**
      * Encrypt the given value.
@@ -53,12 +57,12 @@ class Encrypter {
      * @throws Exception
      */
     public function encrypt($value) {
-        if($this->algo ===FALSE){
+        if ($this->algo === FALSE) {
             throw new Exception('Not supported algorithm found.');
         }
         $iv = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM); //$this->get_random_bytes($this->getIvSize());
         $value = openssl_encrypt(serialize($value), $this->algo, $this->key, 0, $iv);
-       
+
         if ($value === false) {
             throw new Exception('Could not encrypt the data.');
         }
