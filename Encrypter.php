@@ -28,6 +28,11 @@ class Encrypter {
         return substr($key, 0, strlen($search)) === $search;
     }
 
+    /**
+     * Sets algorithm from key length
+     * @param String $key
+     * @return boolean|string
+     */
     public function setAlgo($key) {
 
         switch ($this->keyLenght($key)) {
@@ -43,10 +48,14 @@ class Encrypter {
         }
     }
 
+    /**
+     * Gets key lenght from string
+     * @param String $key 
+     * @return Integer
+     */
     public function keyLenght($key) {
         return mb_strlen($key, '8bit');
     }
-
 
     /**
      * Encrypt the given value.
@@ -119,6 +128,13 @@ class Encrypter {
 
         return FALSE;
     }
+    
+    /**
+     * Returns a hash mac from im and value
+     * @param type $iv
+     * @param type $value
+     * @return string
+     */
 
     function hash($iv, $value) {
 
