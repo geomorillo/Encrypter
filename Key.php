@@ -6,11 +6,10 @@
  * @author geomorillo
  */
 namespace Helpers;
-use Helpers\Data;
 class Key {
     //suported $length 16, 32 the algo should be automatically picked by the encrypter
     public static function generate($length = 16){
-        return 'base64:'.base64_encode(Data::createKey($length));
+        return 'base64:'.base64_encode(createKey($length));
     }
     
 }
