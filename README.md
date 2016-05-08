@@ -13,7 +13,7 @@ Example:
 
 ```
     public function enc() {
-        $key = Key::generate(); //generate a new key, you can save to file if you want.
+        $key = Key::generate(); //generate a new key lenght 16 or 32 without parameter 16 is default, you can save to file if you want.
         $enc = new Encrypter($key); //pass the key to the Encrypter class
         $encrypted=  $enc->encrypt('Hey bro this is secret'); //some text to encrypt
         echo $encrypted;
