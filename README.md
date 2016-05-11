@@ -6,20 +6,17 @@ Encrypt using openssl for nova framework
 Copy the Encrypter.php and Key.php to addons folder
 
 Usage:
-
+* Setup in your Config.php the variable ENCRYPT_KEY with a 32 bits key
 * The Key helper will help you generate a new key so you can save it to a file
 
 Example:
 
 ```
     public function enc() {
-        $key = Key::generate(); //generate a new key lenght 16 or 32 without parameter 16 is default, you can save to file if you want.
-        $enc = new Encrypter($key); //pass the key to the Encrypter class
-        $encrypted=  $enc->encrypt('Hey bro this is secret'); //some text to encrypt
+        $encrypted = Encrypter::encrypt("okokokook");
         echo $encrypted;
-        $decrypted = $enc->decrypt($encrypted);
         echo "<br>";
-        echo $decrypted;
+        echo(Encrypter::decrypt($encrypted));
     }
 ```
 
